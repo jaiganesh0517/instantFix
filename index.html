@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instant Fix – On-Demand Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="logo">Instant<span>Fix</span></div>
+  <div class="nav-links">
+    <button class="nav-btn ghost" onclick="showPage('home')">Home</button>
+    <button class="nav-btn ghost" onclick="showPage('tracking')">Track</button>
+    <button class="nav-btn primary" onclick="showPage('booking')">Book Now</button>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero fade-in">
+    <div>
+      <div class="hero-badge">AI-Powered Services • Live in Lucknow</div>
+      <h1>Fix It <span>Instantly</span>,<br>Anywhere.</h1>
+      <p class="hero-sub">On-demand home services powered by AI. Electricians, plumbers, mechanics & more — vetted professionals at your doorstep in minutes.</p>
+      <div class="hero-actions">
+        <button class="btn-lg btn-primary" onclick="showPage('booking')">⚡ Book a Service</button>
+        <button class="btn-lg btn-outline" onclick="showPage('tracking')">📍 Live Tracking</button>
+      </div>
+      <div class="stats">
+        <div class="stat-item"><div class="stat-num">2min</div><div class="stat-label">Avg. Match Time</div></div>
+        <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Vetted Pros</div></div>
+        <div class="stat-item"><div class="stat-num">4.8★</div><div class="stat-label">Avg. Rating</div></div>
+        <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Emergency Support</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="live-label">🔴 Live Activity</div>
+      <div class="live-card">
+        <div class="lc-icon orange">⚡</div>
+        <div>
+          <div class="lc-name">Electrician Dispatch</div>
+          <div class="lc-sub">Sector 14, Lucknow • Rajesh K.</div>
+        </div>
+        <div class="lc-right"><div class="lc-status status-live">● Live</div></div>
+      </div>
+      <div class="live-card">
+        <div class="lc-icon blue">🔧</div>
+        <div>
+          <div class="lc-name">Plumber Assigned</div>
+          <div class="lc-sub">Aliganj, Lucknow • Suresh M.</div>
+        </div>
+        <div class="lc-right"><div class="lc-status status-eta">ETA 8 min</div></div>
+      </div>
+      <div class="live-card">
+        <div class="lc-icon green">🏠</div>
+        <div>
+          <div class="lc-name">House Cleaning Done</div>
+          <div class="lc-sub">Gomti Nagar • Priya S.</div>
+        </div>
+        <div class="lc-right"><div class="lc-status status-done">✓ Complete</div></div>
+      </div>
+      <div class="ai-info-box">
+        🤖 <strong>AI Engine</strong> matched 47 bookings in the last hour with 98.2% satisfaction rate.
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Services We Offer</h2>
+      <p>6 essential categories, hundreds of verified professionals</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card" onclick="openBooking('Electrician')">
+        <span class="sc-emoji">⚡</span>
+        <div class="sc-name">Electrician</div>
+        <div class="sc-desc">Wiring, short circuits, MCB tripping, fan installation, appliance wiring & emergency fixes.</div>
+        <div class="sc-price">Starting ₹199 · Avg. 25 min arrival</div>
+        <button class="sc-book">Book Now →</button>
+      </div>
+      <div class="service-card" onclick="openBooking('Plumber')">
+        <span class="sc-emoji">🔧</span>
+        <div class="sc-name">Plumber</div>
+        <div class="sc-desc">Pipe leaks, blockages, tap repair, water heater, bathroom fittings & drain cleaning.</div>
+        <div class="sc-price">Starting ₹149 · Avg. 20 min arrival</div>
+        <button class="sc-book">Book Now →</button>
+      </div>
+      <div class="service-card" onclick="openBooking('Car Mechanic')">
+        <span class="sc-emoji">🚗</span>
+        <div class="sc-name">Car Mechanic</div>
+        <div class="sc-desc">Flat tyre, battery jump, oil change, brake check, engine diagnostics on the spot.</div>
+        <div class="sc-price">Starting ₹299 · Avg. 35 min arrival</div>
+        <button class="sc-book">Book Now →</button>
+      </div>
+      <div class="service-card" onclick="openBooking('Toilet Cleaning')">
+        <span class="sc-emoji">🚽</span>
+        <div class="sc-name">Toilet Cleaning</div>
+        <div class="sc-desc">Deep cleaning, sanitizing, odour removal, jet wash & professional-grade disinfection.</div>
+        <div class="sc-price">Starting ₹249 · Avg. 30 min arrival</div>
+        <button class="sc-book">Book Now →</button>
+      </div>
+      <div class="service-card" onclick="openBooking('Appliance Repair')">
+        <span class="sc-emoji">📺</span>
+        <div class="sc-name">Appliance Repair</div>
+        <div class="sc-desc">AC, washing machine, refrigerator, microwave, TV and more fixed by certified technicians.</div>
+        <div class="sc-price">Starting ₹349 · Avg. 40 min arrival</div>
+        <button class="sc-book">Book Now →</button>
+      </div>
+      <div class="service-card" onclick="openBooking('House Cleaning')">
+        <span class="sc-emoji">🏠</span>
+        <div class="sc-name">House Cleaning</div>
+        <div class="sc-desc">Full home deep clean, kitchen, bathroom, floor, window & post-renovation cleanup.</div>
+        <div class="sc-price">Starting ₹499 · Avg. 45 min arrival</div>
+        <button class="sc-book">Book Now →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section how-section">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>4 simple steps to get your problem fixed</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Select Service</h3>
+          <p>Choose the service you need from our 6 categories in just a few taps.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>AI Matches Pro</h3>
+          <p>Our AI finds the best nearby technician based on rating, urgency & location.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Confirm Booking</h3>
+          <p>Review the details, see transparent pricing, and confirm instantly.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Track & Pay</h3>
+          <p>Live-track your technician and pay securely once done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Features -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Powered by AI</h2>
+      <p>Smarter, faster, better service matching</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-card">
+        <div class="ai-icon">🎯</div>
+        <div>
+          <div class="ai-title">Smart Matching</div>
+          <div class="ai-text">Matches users with the right professional using location, rating, urgency, and service type for faster, better-fit service every time.</div>
+        </div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-icon">📊</div>
+        <div>
+          <div class="ai-title">Demand Prediction</div>
+          <div class="ai-text">Forecasts service demand to improve availability planning and reduce wait times during peak hours and emergencies.</div>
+        </div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-icon">🤖</div>
+        <div>
+          <div class="ai-title">Chatbot Assistance</div>
+          <div class="ai-text">Instant help for common questions, booking guidance, and real-time service updates so you're never left wondering.</div>
+        </div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-icon">🛡️</div>
+        <div>
+          <div class="ai-title">Fraud Detection</div>
+          <div class="ai-text">Monitors activity patterns and transactions to detect suspicious behaviour and protect both users and professionals.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Instant Fix</strong> · Built by ShadowCoders · WEB NOVA 2026 · Jaiganesg, Himanshu Vishwakarma, Abhay Pal<br>
+    <span>AI-Powered On-Demand Service Platform · Starting in Lucknow</span>
+  </footer>
+</div>
+
+<!-- ===== BOOKING PAGE ===== -->
+<div class="page" id="page-booking">
+  <div class="booking-container">
+    <h2 class="page-title">Book a Service</h2>
+    <p class="page-sub">Quick, transparent, AI-matched professionals</p>
+
+    <!-- Progress Indicator -->
+    <div class="booking-steps" id="booking-steps">
+      <div class="bstep active" id="bstep-1"><div class="bstep-circle">1</div><div class="bstep-label">Service</div></div>
+      <div class="bstep" id="bstep-2"><div class="bstep-circle">2</div><div class="bstep-label">Details</div></div>
+      <div class="bstep" id="bstep-3"><div class="bstep-circle">3</div><div class="bstep-label">Technician</div></div>
+      <div class="bstep" id="bstep-4"><div class="bstep-circle">4</div><div class="bstep-label">Confirm</div></div>
+    </div>
+
+    <!-- Step 1: Service Selection -->
+    <div class="booking-panel" id="bpanel-1">
+      <div class="bp-title">What do you need fixed?</div>
+      <div class="bp-sub">Select a service category to get started</div>
+      <div class="form-group">
+        <label class="form-label">Service Type</label>
+        <div class="service-chips" id="service-chips">
+          <button class="chip" onclick="selectChip(this,'service')">⚡ Electrician</button>
+          <button class="chip" onclick="selectChip(this,'service')">🔧 Plumber</button>
+          <button class="chip" onclick="selectChip(this,'service')">🚗 Car Mechanic</button>
+          <button class="chip" onclick="selectChip(this,'service')">🚽 Toilet Cleaning</button>
+          <button class="chip" onclick="selectChip(this,'service')">📺 Appliance Repair</button>
+          <button class="chip" onclick="selectChip(this,'service')">🏠 House Cleaning</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Urgency</label>
+        <div class="urgency-btns">
+          <button class="urgency-btn" onclick="selectUrgency(this,'normal')">
+            <span class="ub-icon">📅</span>
+            <div class="ub-label">Scheduled</div>
+            <div class="ub-time">Set a time</div>
+          </button>
+          <button class="urgency-btn" onclick="selectUrgency(this,'urgent')">
+            <span class="ub-icon">⚡</span>
+            <div class="ub-label">Urgent</div>
+            <div class="ub-time">Within 2 hours</div>
+          </button>
+          <button class="urgency-btn emergency" onclick="selectUrgency(this,'emergency')">
+            <span class="ub-icon">🚨</span>
+            <div class="ub-label">Emergency</div>
+            <div class="ub-time">ASAP</div>
+          </button>
+        </div>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" onclick="showPage('home')">← Back</button>
+        <button class="btn-next" onclick="goToStep(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Details -->
+    <div class="booking-panel" id="bpanel-2" style="display:none;">
+      <div class="bp-title">Your Details</div>
+      <div class="bp-sub">Tell us more about the issue and your location</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" placeholder="Rahul Sharma" id="inp-name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" type="tel" placeholder="+91 98765 43210" id="inp-phone"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Address</label>
+        <input class="form-input" type="text" placeholder="Flat 3B, Indira Nagar, Lucknow" id="inp-address"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred Time</label>
+        <input class="form-input" type="datetime-local" id="inp-time"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Describe the Issue</label>
+        <textarea class="form-textarea" placeholder="e.g. The kitchen lights stopped working and MCB keeps tripping..." id="inp-desc"></textarea>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" onclick="goToStep(1)">← Back</button>
+        <button class="btn-next" onclick="goToStep(3)">Find Technicians →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Technician -->
+    <div class="booking-panel" id="bpanel-3" style="display:none;">
+      <div class="bp-title">AI-Matched Technicians</div>
+      <div class="bp-sub">Best professionals near you, ranked by rating & proximity</div>
+      <div id="ai-matching-state" class="ai-matching">
+        <div class="spin-icon">⚙️</div>
+        <div>AI matching nearby professionals...</div>
+      </div>
+      <div class="tech-cards" id="tech-cards" style="display:none;">
+        <div class="tech-card" onclick="selectTech(this,'Rajesh Kumar','₹350')">
+          <div class="tech-avatar">👨‍🔧</div>
+          <div>
+            <div class="tech-name">Rajesh Kumar</div>
+            <div class="tech-meta">8 yrs exp · 1.2 km away</div>
+            <div class="ai-badge">🤖 AI Top Pick</div>
+          </div>
+          <div class="tech-right">
+            <div class="tech-rating">⭐ 4.9</div>
+            <div class="tech-eta">ETA 12 min</div>
+            <div class="tech-price">₹350 est.</div>
+          </div>
+        </div>
+        <div class="tech-card" onclick="selectTech(this,'Suresh Yadav','₹299')">
+          <div class="tech-avatar">👷</div>
+          <div>
+            <div class="tech-name">Suresh Yadav</div>
+            <div class="tech-meta">5 yrs exp · 2.1 km away</div>
+          </div>
+          <div class="tech-right">
+            <div class="tech-rating">⭐ 4.7</div>
+            <div class="tech-eta">ETA 18 min</div>
+            <div class="tech-price">₹299 est.</div>
+          </div>
+        </div>
+        <div class="tech-card" onclick="selectTech(this,'Amit Singh','₹420')">
+          <div class="tech-avatar">🧑‍🔧</div>
+          <div>
+            <div class="tech-name">Amit Singh</div>
+            <div class="tech-meta">12 yrs exp · 3.4 km away</div>
+          </div>
+          <div class="tech-right">
+            <div class="tech-rating">⭐ 4.8</div>
+            <div class="tech-eta">ETA 25 min</div>
+            <div class="tech-price">₹420 est.</div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-btns" style="margin-top:28px;">
+        <button class="btn-back" onclick="goToStep(2)">← Back</button>
+        <button class="btn-next" onclick="goToStep(4)">Confirm Booking →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Confirm & Pay -->
+    <div class="booking-panel" id="bpanel-4" style="display:none;">
+      <div id="booking-form-view">
+        <div class="bp-title">Review & Pay</div>
+        <div class="bp-sub">Almost there! Review your booking summary</div>
+        <div class="summary-box">
+          <div class="summary-row"><span class="sr-label">Service</span><span class="sr-val" id="sum-service">—</span></div>
+          <div class="summary-row"><span class="sr-label">Urgency</span><span class="sr-val" id="sum-urgency">—</span></div>
+          <div class="summary-row"><span class="sr-label">Technician</span><span class="sr-val" id="sum-tech">—</span></div>
+          <div class="summary-row"><span class="sr-label">Address</span><span class="sr-val" id="sum-addr">—</span></div>
+          <div class="summary-row"><span class="sr-label">Platform Fee</span><span class="sr-val">₹49</span></div>
+          <div class="summary-row"><span class="sr-label" style="font-weight:700;">Total Estimate</span><span class="sr-val summary-total" id="sum-total">—</span></div>
+        </div>
+        <label class="form-label">Payment Method</label>
+        <div class="payment-methods">
+          <button class="pm-btn selected" onclick="selectPM(this)"><span>📱</span>UPI</button>
+          <button class="pm-btn" onclick="selectPM(this)"><span>💳</span>Card</button>
+          <button class="pm-btn" onclick="selectPM(this)"><span>💵</span>Cash</button>
+          <button class="pm-btn" onclick="selectPM(this)"><span>🏦</span>Net Banking</button>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-back" onclick="goToStep(3)">← Back</button>
+          <button class="btn-next confirm-btn" onclick="confirmBooking()">✓ Confirm & Pay</button>
+        </div>
+      </div>
+      <!-- Confirmation Screen -->
+      <div class="confirm-screen" id="confirm-screen" style="display:none;">
+        <div class="confirm-icon">✓</div>
+        <div class="confirm-title">Booking Confirmed!</div>
+        <div class="confirm-sub">Your technician is on the way. Booking ID: <strong>#IFX-2847</strong></div>
+        <div class="tracking-card">
+          <div class="tc-label">Live Status</div>
+          <div class="track-steps">
+            <div class="track-step"><div class="ts-dot done">✓</div><div><div class="ts-label">Booking Confirmed</div><div class="ts-time">Just now</div></div></div>
+            <div class="track-step"><div class="ts-dot done">✓</div><div><div class="ts-label">Technician Assigned</div><div class="ts-time">1 min ago</div></div></div>
+            <div class="track-step"><div class="ts-dot active">→</div><div><div class="ts-label">On the Way</div><div class="ts-time" id="confirm-eta">ETA ~12 min</div></div></div>
+            <div class="track-step"><div class="ts-dot">🏠</div><div><div class="ts-label">Service Complete</div><div class="ts-time">Pending</div></div></div>
+          </div>
+        </div>
+        <div class="confirm-actions">
+          <button class="btn-lg btn-primary" onclick="showPage('tracking')">📍 Track Live</button>
+          <button class="btn-lg btn-outline" onclick="showPage('home')">Back to Home</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== TRACKING PAGE ===== -->
+<div class="page" id="page-tracking">
+  <div class="tracking-page fade-in">
+    <div class="track-header">
+      <div>
+        <h2 class="page-title">Live Tracking</h2>
+        <div class="booking-id">Booking <strong>#IFX-2847</strong></div>
+      </div>
+      <div class="status-pill">● On The Way</div>
+    </div>
+
+    <!-- Animated Map -->
+    <div class="map-container">
+      <div class="map-bg"></div>
+      <div class="map-pin home">🏠</div>
+      <div class="map-pin tech">👨‍🔧</div>
+      <div class="map-route"></div>
+      <div class="map-label">📍 Rajesh Kumar is heading to your location</div>
+    </div>
+
+    <!-- Live Status Bar -->
+    <div class="live-status">
+      <div class="ls-dot"></div>
+      <div class="ls-main">
+        <div class="ls-title">Rajesh Kumar is on the way</div>
+        <div class="ls-sub">⚡ Electrician · ⭐ 4.9 · 8 years experience · 🚗 On two-wheeler</div>
+      </div>
+      <div class="ls-eta">
+        <div id="countdown">12 min</div>
+        <span>Estimated Arrival</span>
+      </div>
+    </div>
+
+    <!-- Info Tiles -->
+    <div class="info-grid">
+      <div class="info-tile">
+        <div class="it-label">Service</div>
+        <div class="it-val">⚡ Electrician</div>
+        <div class="it-sub">MCB Tripping Fix</div>
+      </div>
+      <div class="info-tile">
+        <div class="it-label">Estimate</div>
+        <div class="it-val accent">₹399</div>
+        <div class="it-sub">Incl. ₹49 platform fee</div>
+      </div>
+      <div class="info-tile">
+        <div class="it-label">Technician Contact</div>
+        <div class="it-val">📞 Call</div>
+        <div class="it-sub">+91 98001 XXXXX</div>
+      </div>
+    </div>
+
+    <!-- Progress Timeline -->
+    <div class="timeline-box">
+      <div class="timeline-label">Journey Progress</div>
+      <div class="track-steps">
+        <div class="track-step"><div class="ts-dot done">✓</div><div><div class="ts-label">Booking Confirmed</div><div class="ts-time">2:34 PM</div></div></div>
+        <div class="track-step"><div class="ts-dot done">✓</div><div><div class="ts-label">Technician Accepted</div><div class="ts-time">2:35 PM</div></div></div>
+        <div class="track-step"><div class="ts-dot active">→</div><div><div class="ts-label">On The Way</div><div class="ts-time">Since 2:36 PM</div></div></div>
+        <div class="track-step"><div class="ts-dot">🛠️</div><div><div class="ts-label">Work in Progress</div><div class="ts-time">Pending</div></div></div>
+        <div class="track-step"><div class="ts-dot">✅</div><div><div class="ts-label">Job Complete & Paid</div><div class="ts-time">Pending</div></div></div>
+      </div>
+    </div>
+
+    <div class="track-actions">
+      <button class="btn-lg btn-outline" onclick="showPage('home')">← Home</button>
+      <button class="btn-lg btn-primary" onclick="showPage('booking')">+ New Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHATBOT ===== -->
+<button class="chat-fab" onclick="toggleChat()" title="AI Assistant">🤖</button>
+<div class="chat-window hidden" id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div>
+      <div class="chat-hname">FixBot AI</div>
+      <div class="chat-hsub">● Online · Instant Fix Assistant</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs">
+    <div class="msg bot">Hey! 👋 I'm FixBot, your AI assistant. How can I help you today?</div>
+    <div class="msg bot">I can help you book a service, track your technician, or answer any questions!</div>
+  </div>
+  <div class="chat-chips" id="chat-chips">
+    <button class="chat-chip" onclick="chatQuick('Book a service')">📋 Book a service</button>
+    <button class="chat-chip" onclick="chatQuick('Track my booking')">📍 Track booking</button>
+    <button class="chat-chip" onclick="chatQuick('What services do you offer?')">🔧 Services</button>
+    <button class="chat-chip" onclick="chatQuick('What are your prices?')">💰 Pricing</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button class="chat-send" onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<!-- JS loaded last for best performance -->
+<script src="assets/js/app.js"></script>
+</body>
+</html>

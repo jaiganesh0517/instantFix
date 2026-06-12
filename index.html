@@ -3,63 +3,156 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instant Fix – On-Demand Services</title>
+  <title>Instant Fix – On-Demand Home Services</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- ===== AUTH GATE (shown before app) ===== -->
-<div id="auth-gate">
+<!-- ================================================================
+     SCREEN 1: LANDING PAGE
+     First thing user sees — has Login & Sign Up buttons
+================================================================ -->
+<div id="screen-landing">
 
-  <!-- AUTH NAVBAR -->
-  <div class="auth-nav">
+  <!-- Landing Nav -->
+  <div class="landing-nav">
     <div class="logo">Instant<span>Fix</span></div>
+    <div class="landing-nav-actions">
+      <button class="nav-btn ghost" onclick="goToAuth('user','login')">Login</button>
+      <button class="nav-btn primary" onclick="goToAuth('user','signup')">Sign Up Free</button>
+    </div>
   </div>
 
-  <!-- AUTH CARD -->
+  <!-- Hero -->
+  <section class="landing-hero">
+    <div class="lh-content">
+      <div class="hero-badge">⚡ AI-Powered · Live in Lucknow</div>
+      <h1>Fix It <span>Instantly</span>,<br>Anywhere.</h1>
+      <p class="hero-sub">On-demand home services powered by AI. Electricians, plumbers, mechanics & more — vetted professionals at your doorstep in minutes.</p>
+
+      <!-- CTA BUTTONS — main entry points -->
+      <div class="landing-cta">
+        <button class="cta-btn primary-cta" onclick="goToAuth('user','signup')">
+          <span class="cta-icon">👤</span>
+          <div>
+            <div class="cta-title">Get Started as User</div>
+            <div class="cta-sub">Book services instantly</div>
+          </div>
+          <span class="cta-arrow">→</span>
+        </button>
+        <button class="cta-btn admin-cta" onclick="goToAuth('technician','signup')">
+          <span class="cta-icon">🔧</span>
+          <div>
+            <div class="cta-title">Join as Technician</div>
+            <div class="cta-sub">Register your expertise</div>
+          </div>
+          <span class="cta-arrow">→</span>
+        </button>
+        <button class="cta-btn login-cta" onclick="goToAuth('user','login')">
+          <span class="cta-icon">🔑</span>
+          <div>
+            <div class="cta-title">Already have account?</div>
+            <div class="cta-sub">Login here</div>
+          </div>
+          <span class="cta-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-item"><div class="stat-num">2min</div><div class="stat-label">Avg. Match Time</div></div>
+        <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Vetted Pros</div></div>
+        <div class="stat-item"><div class="stat-num">4.8★</div><div class="stat-label">Avg. Rating</div></div>
+        <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Emergency Support</div></div>
+      </div>
+    </div>
+
+    <!-- Live feed visual -->
+    <div class="lh-visual">
+      <div class="live-label">🔴 Live Activity</div>
+      <div class="live-card"><div class="lc-icon orange">⚡</div><div><div class="lc-name">Electrician Dispatch</div><div class="lc-sub">Sector 14, Lucknow • Rajesh K.</div></div><div class="lc-right"><div class="lc-status status-live">● Live</div></div></div>
+      <div class="live-card"><div class="lc-icon blue">🔧</div><div><div class="lc-name">Plumber Assigned</div><div class="lc-sub">Aliganj, Lucknow • Suresh M.</div></div><div class="lc-right"><div class="lc-status status-eta">ETA 8 min</div></div></div>
+      <div class="live-card"><div class="lc-icon green">🏠</div><div><div class="lc-name">House Cleaning Done</div><div class="lc-sub">Gomti Nagar • Priya S.</div></div><div class="lc-right"><div class="lc-status status-done">✓ Complete</div></div></div>
+      <div class="ai-info-box">🤖 <strong>AI Engine</strong> matched 47 bookings in the last hour with 98.2% satisfaction rate.</div>
+    </div>
+  </section>
+
+  <!-- Services preview -->
+  <section class="landing-services">
+    <div class="ls-label">Our Services</div>
+    <div class="service-pills">
+      <span class="sp">⚡ Electrician</span>
+      <span class="sp">🔧 Plumber</span>
+      <span class="sp">🚗 Car Mechanic</span>
+      <span class="sp">🚽 Toilet Cleaning</span>
+      <span class="sp">📺 Appliance Repair</span>
+      <span class="sp">🏠 House Cleaning</span>
+    </div>
+  </section>
+
+  <!-- Admin login link at bottom -->
+  <div class="admin-entry">
+    <button onclick="goToAuth('admin','login')">🛡️ Admin Portal Login</button>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     SCREEN 2: AUTH PAGE
+     Login / Signup for User, Technician, Admin
+================================================================ -->
+<div id="screen-auth" style="display:none;">
+
+  <div class="auth-nav">
+    <div class="logo">Instant<span>Fix</span></div>
+    <button class="back-to-landing" onclick="showScreen('landing')">← Back</button>
+  </div>
+
   <div class="auth-wrapper">
+
+    <!-- AUTH CARD -->
     <div class="auth-card" id="auth-card">
 
-      <!-- Role Selector -->
-      <div class="role-tabs" id="role-tabs">
-        <button class="role-tab active" onclick="setRole('user')" id="role-user">👤 User</button>
-        <button class="role-tab" onclick="setRole('admin')" id="role-admin">🛡️ Admin</button>
+      <!-- Role Tabs -->
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="setRole('user')"       id="role-user">👤 User</button>
+        <button class="role-tab"        onclick="setRole('technician')" id="role-technician">🔧 Technician</button>
+        <button class="role-tab"        onclick="setRole('admin')"      id="role-admin">🛡️ Admin</button>
       </div>
 
-      <!-- Mode Toggle (Login / Signup) -->
-      <div class="auth-mode-toggle" id="auth-mode-toggle">
-        <button class="mode-btn active" onclick="setMode('login')" id="mode-login">Login</button>
-        <button class="mode-btn" onclick="setMode('signup')" id="mode-signup">Sign Up</button>
+      <!-- Mode Toggle -->
+      <div class="auth-mode-toggle">
+        <button class="mode-btn active" onclick="setMode('login')"  id="mode-login">Login</button>
+        <button class="mode-btn"        onclick="setMode('signup')" id="mode-signup">Sign Up</button>
       </div>
 
-      <!-- Dynamic Title -->
       <div class="auth-title" id="auth-title">Welcome Back</div>
-      <div class="auth-sub" id="auth-sub">Login to your User account</div>
+      <div class="auth-sub"   id="auth-sub">Login to your account</div>
 
-      <!-- Login Method Toggle -->
-      <div class="method-toggle">
+      <!-- Login Method -->
+      <div class="method-toggle" id="method-toggle-wrap">
         <button class="method-btn active" onclick="setMethod('email')" id="method-email">✉️ Email</button>
-        <button class="method-btn" onclick="setMethod('phone')" id="method-phone">📱 Phone</button>
+        <button class="method-btn"        onclick="setMethod('phone')" id="method-phone">📱 Phone</button>
       </div>
 
-      <!-- FORM -->
+      <!-- ===== FORM ===== -->
       <div id="auth-form">
 
-        <!-- Signup only: Full Name -->
-        <div class="form-group" id="field-name" style="display:none;">
+        <!-- COMMON: Full Name (signup only) -->
+        <div class="form-group hidden-field" id="field-name">
           <label class="form-label">Full Name</label>
           <input class="form-input" type="text" id="inp-fullname" placeholder="Rahul Sharma"/>
         </div>
 
-        <!-- Email Field -->
+        <!-- Email -->
         <div class="form-group" id="field-email">
           <label class="form-label">Email Address</label>
           <input class="form-input" type="email" id="inp-email" placeholder="rahul@example.com"/>
         </div>
 
-        <!-- Phone Field (hidden by default) -->
-        <div class="form-group" id="field-phone" style="display:none;">
+        <!-- Phone (hidden by default) -->
+        <div class="form-group hidden-field" id="field-phone">
           <label class="form-label">Phone Number</label>
           <div class="phone-row">
             <select class="form-select country-code" id="inp-countrycode">
@@ -73,7 +166,7 @@
         </div>
 
         <!-- Password -->
-        <div class="form-group">
+        <div class="form-group" id="field-password">
           <label class="form-label">Password</label>
           <div class="pw-row">
             <input class="form-input" type="password" id="inp-password" placeholder="••••••••"/>
@@ -81,45 +174,155 @@
           </div>
         </div>
 
-        <!-- Signup only: Confirm Password -->
-        <div class="form-group" id="field-confirm-pw" style="display:none;">
+        <!-- Confirm Password (signup only) -->
+        <div class="form-group hidden-field" id="field-confirm-pw">
           <label class="form-label">Confirm Password</label>
           <div class="pw-row">
             <input class="form-input" type="password" id="inp-confirm-pw" placeholder="••••••••"/>
           </div>
         </div>
 
-        <!-- Admin: secret key -->
-        <div class="form-group" id="field-admin-key" style="display:none;">
-          <label class="form-label">Admin Secret Key</label>
-          <input class="form-input" type="password" id="inp-admin-key" placeholder="Enter admin access key"/>
-          <div class="field-hint">Contact system administrator for access key</div>
+        <!-- ===== TECHNICIAN EXTRA FIELDS (signup only) ===== -->
+        <div id="technician-fields" style="display:none;">
+          <div class="section-divider">🔧 Professional Details</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">City / Area</label>
+              <input class="form-input" type="text" id="inp-city" placeholder="Lucknow"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Years of Experience</label>
+              <select class="form-select" id="inp-experience">
+                <option value="">Select</option>
+                <option>Less than 1 year</option>
+                <option>1–2 years</option>
+                <option>3–5 years</option>
+                <option>6–10 years</option>
+                <option>10+ years</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Primary Expertise</label>
+            <select class="form-select" id="inp-expertise">
+              <option value="">Select your main service</option>
+              <option>⚡ Electrician</option>
+              <option>🔧 Plumber</option>
+              <option>🚗 Car Mechanic</option>
+              <option>🚽 Toilet Cleaning</option>
+              <option>📺 Appliance Repair</option>
+              <option>🏠 House Cleaning</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Additional Skills</label>
+            <div class="skill-chips" id="skill-chips">
+              <button type="button" class="chip" onclick="toggleSkill(this)">⚡ Electrical</button>
+              <button type="button" class="chip" onclick="toggleSkill(this)">🔧 Plumbing</button>
+              <button type="button" class="chip" onclick="toggleSkill(this)">🚗 Automotive</button>
+              <button type="button" class="chip" onclick="toggleSkill(this)">❄️ AC Repair</button>
+              <button type="button" class="chip" onclick="toggleSkill(this)">🏠 Cleaning</button>
+              <button type="button" class="chip" onclick="toggleSkill(this)">🔨 Carpentry</button>
+              <button type="button" class="chip" onclick="toggleSkill(this)">🎨 Painting</button>
+              <button type="button" class="chip" onclick="toggleSkill(this)">📺 Electronics</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Availability</label>
+              <select class="form-select" id="inp-availability">
+                <option value="">Select</option>
+                <option>Full Time (9am–9pm)</option>
+                <option>Morning (6am–12pm)</option>
+                <option>Afternoon (12pm–6pm)</option>
+                <option>Evening (6pm–10pm)</option>
+                <option>24/7 Emergency</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vehicle Type</label>
+              <select class="form-select" id="inp-vehicle">
+                <option value="">Select</option>
+                <option>Two-wheeler (Bike)</option>
+                <option>Three-wheeler (Auto)</option>
+                <option>Four-wheeler (Car)</option>
+                <option>No Vehicle</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Govt. ID Type</label>
+            <select class="form-select" id="inp-id-type">
+              <option value="">Select ID proof</option>
+              <option>Aadhaar Card</option>
+              <option>PAN Card</option>
+              <option>Voter ID</option>
+              <option>Driving License</option>
+              <option>Passport</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Govt. ID Number</label>
+            <input class="form-input" type="text" id="inp-id-number" placeholder="XXXX-XXXX-XXXX"/>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Brief Bio / About You</label>
+            <textarea class="form-textarea" id="inp-bio" rows="3" placeholder="e.g. Certified electrician with 8 years of experience in residential and commercial wiring..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Expected Rate (per hour)</label>
+            <div class="rate-row">
+              <span class="rate-prefix">₹</span>
+              <input class="form-input" type="number" id="inp-rate" placeholder="250" min="50" max="2000"/>
+              <span class="rate-suffix">/hr</span>
+            </div>
+          </div>
+
+          <div class="terms-row">
+            <input type="checkbox" id="tech-terms"/>
+            <label for="tech-terms">I agree to <a href="#" onclick="return false">Terms & Conditions</a> and background verification process</label>
+          </div>
         </div>
 
-        <!-- Error / Success message -->
+        <!-- ===== ADMIN FIELDS ===== -->
+        <div id="admin-fields" style="display:none;">
+          <div class="form-group">
+            <label class="form-label">Admin Secret Key</label>
+            <input class="form-input" type="password" id="inp-admin-key" placeholder="Enter admin access key"/>
+            <div class="field-hint">🔒 Contact system administrator for the secret key</div>
+          </div>
+        </div>
+
+        <!-- Message -->
         <div class="auth-msg" id="auth-msg" style="display:none;"></div>
 
-        <!-- Submit Button -->
-        <button class="auth-submit" id="auth-submit" onclick="handleAuth()">
+        <!-- Submit -->
+        <button class="auth-submit" onclick="handleAuth()">
           <span id="submit-text">Login</span>
-          <span id="submit-loader" style="display:none;">⏳</span>
+          <span id="submit-loader" style="display:none;">⏳ Please wait...</span>
         </button>
 
-        <!-- Forgot Password (login only) -->
+        <!-- Forgot / Switch -->
         <div class="forgot-pw" id="forgot-pw">
           <button onclick="forgotPassword()">Forgot Password?</button>
         </div>
-
-        <!-- Switch mode link -->
         <div class="auth-switch" id="auth-switch">
           Don't have an account? <button onclick="setMode('signup')">Sign Up</button>
         </div>
 
-      </div>
-    </div>
+      </div><!-- end auth-form -->
+    </div><!-- end auth-card -->
 
-    <!-- Decorative side info -->
-    <div class="auth-info">
+    <!-- Side Info Panel -->
+    <div class="auth-info" id="auth-info-panel">
       <div class="auth-info-badge">⚡ AI-Powered</div>
       <h2>Your home,<br><span>fixed instantly.</span></h2>
       <p>Join 10,000+ users who trust Instant Fix for reliable, fast, on-demand services in Lucknow.</p>
@@ -129,31 +332,46 @@
         <div class="af-item">💰 Transparent Pricing</div>
         <div class="af-item">🚨 24/7 Emergency Support</div>
       </div>
+      <!-- Technician side panel content -->
+      <div id="tech-side-info" style="display:none;margin-top:24px;">
+        <div class="tech-perks">
+          <div class="tp-item">💼 Steady income, flexible hours</div>
+          <div class="tp-item">🤖 AI routes best jobs to you</div>
+          <div class="tp-item">💰 Earn ₹500–₹2000/day</div>
+          <div class="tp-item">🌟 Build your professional rating</div>
+        </div>
+      </div>
     </div>
-  </div>
+
+  </div><!-- end auth-wrapper -->
 </div>
 
-<!-- ===== MAIN APP (hidden until logged in) ===== -->
-<div id="main-app" style="display:none;">
 
-  <!-- ===== NAVBAR ===== -->
+<!-- ================================================================
+     SCREEN 3: MAIN APP (after login)
+================================================================ -->
+<div id="screen-app" style="display:none;">
+
+  <!-- App Navbar -->
   <nav>
     <div class="logo">Instant<span>Fix</span></div>
     <div class="nav-links">
-      <button class="nav-btn ghost" onclick="showPage('home')">Home</button>
-      <button class="nav-btn ghost" id="nav-track-btn" onclick="showPage('tracking')">Track</button>
-      <button class="nav-btn ghost" id="nav-admin-btn" onclick="showPage('admin')" style="display:none;">🛡️ Dashboard</button>
+      <button class="nav-btn ghost" onclick="showPage('home')"     id="nav-home-btn">Home</button>
+      <button class="nav-btn ghost" onclick="showPage('tracking')" id="nav-track-btn">Track</button>
+      <button class="nav-btn ghost" onclick="showPage('admin')"    id="nav-admin-btn" style="display:none;">🛡️ Dashboard</button>
+
+      <!-- User Avatar Pill -->
       <div class="user-pill" id="user-pill" onclick="toggleUserMenu()">
         <span id="user-avatar-nav">👤</span>
         <span id="user-name-nav">User</span>
         <span>▾</span>
       </div>
       <div class="user-menu hidden" id="user-menu">
-        <div class="um-item" id="um-role-badge">Role: User</div>
+        <div class="um-item um-header" id="um-role-badge">👤 User</div>
         <div class="um-divider"></div>
-        <div class="um-item" onclick="showPage('home')">🏠 Home</div>
-        <div class="um-item" onclick="showPage('booking')">📋 Book Service</div>
-        <div class="um-item" onclick="showPage('tracking')">📍 Track</div>
+        <div class="um-item" onclick="showPage('home');toggleUserMenu()">🏠 Home</div>
+        <div class="um-item" id="um-book" onclick="showPage('booking');toggleUserMenu()">📋 Book Service</div>
+        <div class="um-item" id="um-track" onclick="showPage('tracking');toggleUserMenu()">📍 Track</div>
         <div class="um-divider"></div>
         <div class="um-item logout" onclick="logout()">🚪 Logout</div>
       </div>
@@ -166,7 +384,7 @@
       <div>
         <div class="hero-badge">AI-Powered Services • Live in Lucknow</div>
         <h1>Fix It <span>Instantly</span>,<br>Anywhere.</h1>
-        <p class="hero-sub">On-demand home services powered by AI. Electricians, plumbers, mechanics & more — vetted professionals at your doorstep in minutes.</p>
+        <p class="hero-sub">On-demand home services powered by AI. Vetted professionals at your doorstep in minutes.</p>
         <div class="hero-actions">
           <button class="btn-lg btn-primary" onclick="showPage('booking')">⚡ Book a Service</button>
           <button class="btn-lg btn-outline" onclick="showPage('tracking')">📍 Live Tracking</button>
@@ -180,56 +398,41 @@
       </div>
       <div class="hero-visual">
         <div class="live-label">🔴 Live Activity</div>
-        <div class="live-card">
-          <div class="lc-icon orange">⚡</div>
-          <div><div class="lc-name">Electrician Dispatch</div><div class="lc-sub">Sector 14, Lucknow • Rajesh K.</div></div>
-          <div class="lc-right"><div class="lc-status status-live">● Live</div></div>
-        </div>
-        <div class="live-card">
-          <div class="lc-icon blue">🔧</div>
-          <div><div class="lc-name">Plumber Assigned</div><div class="lc-sub">Aliganj, Lucknow • Suresh M.</div></div>
-          <div class="lc-right"><div class="lc-status status-eta">ETA 8 min</div></div>
-        </div>
-        <div class="live-card">
-          <div class="lc-icon green">🏠</div>
-          <div><div class="lc-name">House Cleaning Done</div><div class="lc-sub">Gomti Nagar • Priya S.</div></div>
-          <div class="lc-right"><div class="lc-status status-done">✓ Complete</div></div>
-        </div>
+        <div class="live-card"><div class="lc-icon orange">⚡</div><div><div class="lc-name">Electrician Dispatch</div><div class="lc-sub">Sector 14, Lucknow • Rajesh K.</div></div><div class="lc-right"><div class="lc-status status-live">● Live</div></div></div>
+        <div class="live-card"><div class="lc-icon blue">🔧</div><div><div class="lc-name">Plumber Assigned</div><div class="lc-sub">Aliganj, Lucknow • Suresh M.</div></div><div class="lc-right"><div class="lc-status status-eta">ETA 8 min</div></div></div>
+        <div class="live-card"><div class="lc-icon green">🏠</div><div><div class="lc-name">House Cleaning Done</div><div class="lc-sub">Gomti Nagar • Priya S.</div></div><div class="lc-right"><div class="lc-status status-done">✓ Complete</div></div></div>
         <div class="ai-info-box">🤖 <strong>AI Engine</strong> matched 47 bookings in the last hour with 98.2% satisfaction rate.</div>
       </div>
     </section>
 
-    <!-- Services -->
     <section class="section">
       <div class="section-header"><h2>Services We Offer</h2><p>6 essential categories, hundreds of verified professionals</p></div>
       <div class="services-grid">
-        <div class="service-card" onclick="openBooking('Electrician')"><span class="sc-emoji">⚡</span><div class="sc-name">Electrician</div><div class="sc-desc">Wiring, short circuits, MCB tripping, fan installation & emergency fixes.</div><div class="sc-price">Starting ₹199 · Avg. 25 min arrival</div><button class="sc-book">Book Now →</button></div>
-        <div class="service-card" onclick="openBooking('Plumber')"><span class="sc-emoji">🔧</span><div class="sc-name">Plumber</div><div class="sc-desc">Pipe leaks, blockages, tap repair, water heater & drain cleaning.</div><div class="sc-price">Starting ₹149 · Avg. 20 min arrival</div><button class="sc-book">Book Now →</button></div>
-        <div class="service-card" onclick="openBooking('Car Mechanic')"><span class="sc-emoji">🚗</span><div class="sc-name">Car Mechanic</div><div class="sc-desc">Flat tyre, battery jump, oil change, brake check on the spot.</div><div class="sc-price">Starting ₹299 · Avg. 35 min arrival</div><button class="sc-book">Book Now →</button></div>
-        <div class="service-card" onclick="openBooking('Toilet Cleaning')"><span class="sc-emoji">🚽</span><div class="sc-name">Toilet Cleaning</div><div class="sc-desc">Deep cleaning, sanitizing, odour removal & professional disinfection.</div><div class="sc-price">Starting ₹249 · Avg. 30 min arrival</div><button class="sc-book">Book Now →</button></div>
-        <div class="service-card" onclick="openBooking('Appliance Repair')"><span class="sc-emoji">📺</span><div class="sc-name">Appliance Repair</div><div class="sc-desc">AC, washing machine, refrigerator, microwave & TV repair.</div><div class="sc-price">Starting ₹349 · Avg. 40 min arrival</div><button class="sc-book">Book Now →</button></div>
-        <div class="service-card" onclick="openBooking('House Cleaning')"><span class="sc-emoji">🏠</span><div class="sc-name">House Cleaning</div><div class="sc-desc">Full home deep clean, kitchen, bathroom, floor & window cleanup.</div><div class="sc-price">Starting ₹499 · Avg. 45 min arrival</div><button class="sc-book">Book Now →</button></div>
+        <div class="service-card" onclick="openBooking('Electrician')"><span class="sc-emoji">⚡</span><div class="sc-name">Electrician</div><div class="sc-desc">Wiring, MCB tripping, fan installation & emergency fixes.</div><div class="sc-price">Starting ₹199 · Avg. 25 min arrival</div><button class="sc-book">Book Now →</button></div>
+        <div class="service-card" onclick="openBooking('Plumber')"><span class="sc-emoji">🔧</span><div class="sc-name">Plumber</div><div class="sc-desc">Pipe leaks, blockages, tap repair & drain cleaning.</div><div class="sc-price">Starting ₹149 · Avg. 20 min arrival</div><button class="sc-book">Book Now →</button></div>
+        <div class="service-card" onclick="openBooking('Car Mechanic')"><span class="sc-emoji">🚗</span><div class="sc-name">Car Mechanic</div><div class="sc-desc">Flat tyre, battery jump, oil change & engine diagnostics.</div><div class="sc-price">Starting ₹299 · Avg. 35 min arrival</div><button class="sc-book">Book Now →</button></div>
+        <div class="service-card" onclick="openBooking('Toilet Cleaning')"><span class="sc-emoji">🚽</span><div class="sc-name">Toilet Cleaning</div><div class="sc-desc">Deep cleaning, sanitizing & professional disinfection.</div><div class="sc-price">Starting ₹249 · Avg. 30 min arrival</div><button class="sc-book">Book Now →</button></div>
+        <div class="service-card" onclick="openBooking('Appliance Repair')"><span class="sc-emoji">📺</span><div class="sc-name">Appliance Repair</div><div class="sc-desc">AC, washing machine, refrigerator & TV repair.</div><div class="sc-price">Starting ₹349 · Avg. 40 min arrival</div><button class="sc-book">Book Now →</button></div>
+        <div class="service-card" onclick="openBooking('House Cleaning')"><span class="sc-emoji">🏠</span><div class="sc-name">House Cleaning</div><div class="sc-desc">Full home deep clean, kitchen, bathroom & windows.</div><div class="sc-price">Starting ₹499 · Avg. 45 min arrival</div><button class="sc-book">Book Now →</button></div>
       </div>
     </section>
 
-    <!-- How it Works -->
     <section class="section how-section">
       <div style="max-width:1100px;margin:0 auto;">
         <div class="section-header"><h2>How It Works</h2><p>4 simple steps to get your problem fixed</p></div>
         <div class="steps">
-          <div class="step"><div class="step-num">1</div><h3>Select Service</h3><p>Choose from 6 categories in just a few taps.</p></div>
+          <div class="step"><div class="step-num">1</div><h3>Select Service</h3><p>Choose from 6 categories in a few taps.</p></div>
           <div class="step"><div class="step-num">2</div><h3>AI Matches Pro</h3><p>AI finds the best nearby technician instantly.</p></div>
-          <div class="step"><div class="step-num">3</div><h3>Confirm Booking</h3><p>Review details, see transparent pricing & confirm.</p></div>
-          <div class="step"><div class="step-num">4</div><h3>Track & Pay</h3><p>Live-track your technician and pay once done.</p></div>
+          <div class="step"><div class="step-num">3</div><h3>Confirm Booking</h3><p>Transparent pricing, confirm in seconds.</p></div>
+          <div class="step"><div class="step-num">4</div><h3>Track & Pay</h3><p>Live-track and pay securely when done.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- AI Features -->
     <section class="section">
-      <div class="section-header"><h2>Powered by AI</h2><p>Smarter, faster, better service matching</p></div>
+      <div class="section-header"><h2>Powered by AI</h2><p>Smarter, faster, better matching</p></div>
       <div class="ai-grid">
-        <div class="ai-card"><div class="ai-icon">🎯</div><div><div class="ai-title">Smart Matching</div><div class="ai-text">Matches users with the right professional using location, rating, urgency, and service type.</div></div></div>
+        <div class="ai-card"><div class="ai-icon">🎯</div><div><div class="ai-title">Smart Matching</div><div class="ai-text">Matches users with the right professional using location, rating, and urgency.</div></div></div>
         <div class="ai-card"><div class="ai-icon">📊</div><div><div class="ai-title">Demand Prediction</div><div class="ai-text">Forecasts service demand to improve availability and reduce wait times.</div></div></div>
         <div class="ai-card"><div class="ai-icon">🤖</div><div><div class="ai-title">Chatbot Assistance</div><div class="ai-text">Instant help for booking guidance and real-time service updates.</div></div></div>
         <div class="ai-card"><div class="ai-icon">🛡️</div><div><div class="ai-title">Fraud Detection</div><div class="ai-text">Monitors activity to detect suspicious behaviour and protect everyone.</div></div></div>
@@ -244,13 +447,14 @@
     <div class="booking-container">
       <h2 class="page-title">Book a Service</h2>
       <p class="page-sub">Quick, transparent, AI-matched professionals</p>
-      <div class="booking-steps" id="booking-steps">
+      <div class="booking-steps">
         <div class="bstep active" id="bstep-1"><div class="bstep-circle">1</div><div class="bstep-label">Service</div></div>
         <div class="bstep" id="bstep-2"><div class="bstep-circle">2</div><div class="bstep-label">Details</div></div>
         <div class="bstep" id="bstep-3"><div class="bstep-circle">3</div><div class="bstep-label">Technician</div></div>
         <div class="bstep" id="bstep-4"><div class="bstep-circle">4</div><div class="bstep-label">Confirm</div></div>
       </div>
 
+      <!-- Step 1 -->
       <div class="booking-panel" id="bpanel-1">
         <div class="bp-title">What do you need fixed?</div>
         <div class="bp-sub">Select a service category</div>
@@ -268,33 +472,29 @@
         <div class="form-group">
           <label class="form-label">Urgency</label>
           <div class="urgency-btns">
-            <button class="urgency-btn" onclick="selectUrgency(this,'normal')"><span class="ub-icon">📅</span><div class="ub-label">Scheduled</div><div class="ub-time">Set a time</div></button>
-            <button class="urgency-btn" onclick="selectUrgency(this,'urgent')"><span class="ub-icon">⚡</span><div class="ub-label">Urgent</div><div class="ub-time">Within 2 hours</div></button>
-            <button class="urgency-btn emergency" onclick="selectUrgency(this,'emergency')"><span class="ub-icon">🚨</span><div class="ub-label">Emergency</div><div class="ub-time">ASAP</div></button>
+            <button class="urgency-btn" onclick="selectUrgency(this)"><span class="ub-icon">📅</span><div class="ub-label">Scheduled</div><div class="ub-time">Set a time</div></button>
+            <button class="urgency-btn" onclick="selectUrgency(this)"><span class="ub-icon">⚡</span><div class="ub-label">Urgent</div><div class="ub-time">Within 2 hours</div></button>
+            <button class="urgency-btn emergency" onclick="selectUrgency(this)"><span class="ub-icon">🚨</span><div class="ub-label">Emergency</div><div class="ub-time">ASAP</div></button>
           </div>
         </div>
-        <div class="nav-btns">
-          <button class="btn-back" onclick="showPage('home')">← Back</button>
-          <button class="btn-next" onclick="goToStep(2)">Continue →</button>
-        </div>
+        <div class="nav-btns"><button class="btn-back" onclick="showPage('home')">← Back</button><button class="btn-next" onclick="goToStep(2)">Continue →</button></div>
       </div>
 
+      <!-- Step 2 -->
       <div class="booking-panel" id="bpanel-2" style="display:none;">
         <div class="bp-title">Your Details</div>
-        <div class="bp-sub">Tell us about the issue and location</div>
+        <div class="bp-sub">Tell us about the issue and your location</div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Rahul Sharma" id="inp-name"/></div>
-          <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input" type="tel" placeholder="+91 98765 43210" id="inp-phone"/></div>
+          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" id="inp-name" placeholder="Rahul Sharma"/></div>
+          <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" id="inp-bphone" placeholder="+91 98765 43210"/></div>
         </div>
-        <div class="form-group"><label class="form-label">Address</label><input class="form-input" type="text" placeholder="Flat 3B, Indira Nagar, Lucknow" id="inp-address"/></div>
+        <div class="form-group"><label class="form-label">Address</label><input class="form-input" type="text" id="inp-address" placeholder="Flat 3B, Indira Nagar, Lucknow"/></div>
         <div class="form-group"><label class="form-label">Preferred Time</label><input class="form-input" type="datetime-local" id="inp-time"/></div>
-        <div class="form-group"><label class="form-label">Describe the Issue</label><textarea class="form-textarea" placeholder="e.g. Kitchen lights stopped working, MCB keeps tripping..." id="inp-desc"></textarea></div>
-        <div class="nav-btns">
-          <button class="btn-back" onclick="goToStep(1)">← Back</button>
-          <button class="btn-next" onclick="goToStep(3)">Find Technicians →</button>
-        </div>
+        <div class="form-group"><label class="form-label">Describe the Issue</label><textarea class="form-textarea" id="inp-desc" placeholder="e.g. Kitchen lights stopped working, MCB keeps tripping..."></textarea></div>
+        <div class="nav-btns"><button class="btn-back" onclick="goToStep(1)">← Back</button><button class="btn-next" onclick="goToStep(3)">Find Technicians →</button></div>
       </div>
 
+      <!-- Step 3 -->
       <div class="booking-panel" id="bpanel-3" style="display:none;">
         <div class="bp-title">AI-Matched Technicians</div>
         <div class="bp-sub">Best professionals near you, ranked by rating & proximity</div>
@@ -304,16 +504,14 @@
           <div class="tech-card" onclick="selectTech(this,'Suresh Yadav','₹299')"><div class="tech-avatar">👷</div><div><div class="tech-name">Suresh Yadav</div><div class="tech-meta">5 yrs exp · 2.1 km away</div></div><div class="tech-right"><div class="tech-rating">⭐ 4.7</div><div class="tech-eta">ETA 18 min</div><div class="tech-price">₹299 est.</div></div></div>
           <div class="tech-card" onclick="selectTech(this,'Amit Singh','₹420')"><div class="tech-avatar">🧑‍🔧</div><div><div class="tech-name">Amit Singh</div><div class="tech-meta">12 yrs exp · 3.4 km away</div></div><div class="tech-right"><div class="tech-rating">⭐ 4.8</div><div class="tech-eta">ETA 25 min</div><div class="tech-price">₹420 est.</div></div></div>
         </div>
-        <div class="nav-btns" style="margin-top:28px;">
-          <button class="btn-back" onclick="goToStep(2)">← Back</button>
-          <button class="btn-next" onclick="goToStep(4)">Confirm Booking →</button>
-        </div>
+        <div class="nav-btns" style="margin-top:28px;"><button class="btn-back" onclick="goToStep(2)">← Back</button><button class="btn-next" onclick="goToStep(4)">Confirm Booking →</button></div>
       </div>
 
+      <!-- Step 4 -->
       <div class="booking-panel" id="bpanel-4" style="display:none;">
         <div id="booking-form-view">
           <div class="bp-title">Review & Pay</div>
-          <div class="bp-sub">Almost there! Review your booking summary</div>
+          <div class="bp-sub">Almost there! Review your summary</div>
           <div class="summary-box">
             <div class="summary-row"><span class="sr-label">Service</span><span class="sr-val" id="sum-service">—</span></div>
             <div class="summary-row"><span class="sr-label">Urgency</span><span class="sr-val" id="sum-urgency">—</span></div>
@@ -329,10 +527,7 @@
             <button class="pm-btn" onclick="selectPM(this)"><span>💵</span>Cash</button>
             <button class="pm-btn" onclick="selectPM(this)"><span>🏦</span>Net Banking</button>
           </div>
-          <div class="nav-btns">
-            <button class="btn-back" onclick="goToStep(3)">← Back</button>
-            <button class="btn-next confirm-btn" onclick="confirmBooking()">✓ Confirm & Pay</button>
-          </div>
+          <div class="nav-btns"><button class="btn-back" onclick="goToStep(3)">← Back</button><button class="btn-next confirm-btn" onclick="confirmBooking()">✓ Confirm & Pay</button></div>
         </div>
         <div class="confirm-screen" id="confirm-screen" style="display:none;">
           <div class="confirm-icon">✓</div>
@@ -343,7 +538,7 @@
             <div class="track-steps">
               <div class="track-step"><div class="ts-dot done">✓</div><div><div class="ts-label">Booking Confirmed</div><div class="ts-time">Just now</div></div></div>
               <div class="track-step"><div class="ts-dot done">✓</div><div><div class="ts-label">Technician Assigned</div><div class="ts-time">1 min ago</div></div></div>
-              <div class="track-step"><div class="ts-dot active">→</div><div><div class="ts-label">On the Way</div><div class="ts-time" id="confirm-eta">ETA ~12 min</div></div></div>
+              <div class="track-step"><div class="ts-dot active">→</div><div><div class="ts-label">On the Way</div><div class="ts-time">ETA ~12 min</div></div></div>
               <div class="track-step"><div class="ts-dot">🏠</div><div><div class="ts-label">Service Complete</div><div class="ts-time">Pending</div></div></div>
             </div>
           </div>
@@ -359,22 +554,9 @@
   <!-- ===== TRACKING PAGE ===== -->
   <div class="page" id="page-tracking">
     <div class="tracking-page fade-in">
-      <div class="track-header">
-        <div><h2 class="page-title">Live Tracking</h2><div class="booking-id">Booking <strong>#IFX-2847</strong></div></div>
-        <div class="status-pill">● On The Way</div>
-      </div>
-      <div class="map-container">
-        <div class="map-bg"></div>
-        <div class="map-pin home">🏠</div>
-        <div class="map-pin tech">👨‍🔧</div>
-        <div class="map-route"></div>
-        <div class="map-label">📍 Rajesh Kumar is heading to your location</div>
-      </div>
-      <div class="live-status">
-        <div class="ls-dot"></div>
-        <div class="ls-main"><div class="ls-title">Rajesh Kumar is on the way</div><div class="ls-sub">⚡ Electrician · ⭐ 4.9 · 8 years experience</div></div>
-        <div class="ls-eta"><div id="countdown">12 min</div><span>Estimated Arrival</span></div>
-      </div>
+      <div class="track-header"><div><h2 class="page-title">Live Tracking</h2><div class="booking-id">Booking <strong>#IFX-2847</strong></div></div><div class="status-pill">● On The Way</div></div>
+      <div class="map-container"><div class="map-bg"></div><div class="map-pin home">🏠</div><div class="map-pin tech">👨‍🔧</div><div class="map-route"></div><div class="map-label">📍 Rajesh Kumar is heading to your location</div></div>
+      <div class="live-status"><div class="ls-dot"></div><div class="ls-main"><div class="ls-title">Rajesh Kumar is on the way</div><div class="ls-sub">⚡ Electrician · ⭐ 4.9 · 8 years experience</div></div><div class="ls-eta"><div id="countdown">12 min</div><span>Estimated Arrival</span></div></div>
       <div class="info-grid">
         <div class="info-tile"><div class="it-label">Service</div><div class="it-val">⚡ Electrician</div><div class="it-sub">MCB Tripping Fix</div></div>
         <div class="info-tile"><div class="it-label">Estimate</div><div class="it-val accent">₹399</div><div class="it-sub">Incl. ₹49 platform fee</div></div>
@@ -400,101 +582,33 @@
   <!-- ===== ADMIN DASHBOARD ===== -->
   <div class="page" id="page-admin">
     <div class="admin-container fade-in">
-      <div class="admin-header">
-        <div>
-          <h2 class="page-title">🛡️ Admin Dashboard</h2>
-          <p class="page-sub">Manage bookings, users & platform analytics</p>
-        </div>
-        <div class="admin-live-badge">● Live</div>
-      </div>
-
-      <!-- Stats Row -->
+      <div class="admin-header"><div><h2 class="page-title">🛡️ Admin Dashboard</h2><p class="page-sub">Manage bookings, users & platform analytics</p></div><div class="admin-live-badge">● Live</div></div>
       <div class="admin-stats">
         <div class="admin-stat-card"><div class="asc-icon" style="background:rgba(255,107,43,0.1)">📋</div><div class="asc-num">247</div><div class="asc-label">Total Bookings</div><div class="asc-change up">↑ 12% today</div></div>
         <div class="admin-stat-card"><div class="asc-icon" style="background:rgba(74,158,255,0.1)">👥</div><div class="asc-num">1,842</div><div class="asc-label">Registered Users</div><div class="asc-change up">↑ 8 new today</div></div>
         <div class="admin-stat-card"><div class="asc-icon" style="background:rgba(46,204,113,0.1)">👨‍🔧</div><div class="asc-num">56</div><div class="asc-label">Active Technicians</div><div class="asc-change">● 14 online now</div></div>
         <div class="admin-stat-card"><div class="asc-icon" style="background:rgba(241,196,15,0.1)">💰</div><div class="asc-num">₹84K</div><div class="asc-label">Revenue Today</div><div class="asc-change up">↑ 23% vs yesterday</div></div>
       </div>
-
       <div class="admin-grid">
-        <!-- Live Bookings -->
-        <div class="admin-panel">
-          <div class="ap-header"><span>📋 Live Bookings</span><span class="ap-badge">6 Active</span></div>
-          <div class="admin-table">
-            <div class="at-row at-head"><span>ID</span><span>Service</span><span>User</span><span>Status</span><span>Amount</span></div>
-            <div class="at-row"><span>#2847</span><span>⚡ Electric</span><span>Rahul S.</span><span class="at-status live">On Way</span><span>₹399</span></div>
-            <div class="at-row"><span>#2846</span><span>🔧 Plumber</span><span>Priya M.</span><span class="at-status active">In Progress</span><span>₹249</span></div>
-            <div class="at-row"><span>#2845</span><span>🏠 Cleaning</span><span>Amit K.</span><span class="at-status done">Complete</span><span>₹599</span></div>
-            <div class="at-row"><span>#2844</span><span>🚗 Mechanic</span><span>Sonia T.</span><span class="at-status live">On Way</span><span>₹450</span></div>
-            <div class="at-row"><span>#2843</span><span>📺 Appliance</span><span>Vikram R.</span><span class="at-status pending">Pending</span><span>₹349</span></div>
-          </div>
-        </div>
-
-        <!-- Registered Users -->
-        <div class="admin-panel">
-          <div class="ap-header"><span>👥 Recent Users</span><span class="ap-badge">1,842 Total</span></div>
-          <div class="admin-table">
-            <div class="at-row at-head"><span>Name</span><span>Contact</span><span>Role</span><span>Bookings</span></div>
-            <div class="at-row"><span>Rahul S.</span><span>rahul@…</span><span class="role-pill user">User</span><span>4</span></div>
-            <div class="at-row"><span>Priya M.</span><span>+91 987…</span><span class="role-pill user">User</span><span>2</span></div>
-            <div class="at-row"><span>Admin A.</span><span>admin@…</span><span class="role-pill admin">Admin</span><span>—</span></div>
-            <div class="at-row"><span>Vikram R.</span><span>vikram@…</span><span class="role-pill user">User</span><span>7</span></div>
-          </div>
-        </div>
-
-        <!-- Service Breakdown -->
-        <div class="admin-panel">
-          <div class="ap-header"><span>📊 Service Breakdown</span><span class="ap-badge">Today</span></div>
-          <div class="service-bars">
-            <div class="sb-row"><span>⚡ Electrician</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:78%;background:var(--accent)"></div></div><span>78</span></div>
-            <div class="sb-row"><span>🔧 Plumber</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:62%;background:var(--blue)"></div></div><span>62</span></div>
-            <div class="sb-row"><span>🏠 Cleaning</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:54%;background:var(--green)"></div></div><span>54</span></div>
-            <div class="sb-row"><span>🚗 Mechanic</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:41%;background:var(--yellow)"></div></div><span>41</span></div>
-            <div class="sb-row"><span>📺 Appliance</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:32%;background:#a855f7"></div></div><span>32</span></div>
-          </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="admin-panel">
-          <div class="ap-header"><span>⚡ Quick Actions</span></div>
-          <div class="quick-actions">
-            <button class="qa-btn" onclick="adminAction('broadcast')">📢 Send Broadcast</button>
-            <button class="qa-btn" onclick="adminAction('technician')">➕ Add Technician</button>
-            <button class="qa-btn" onclick="adminAction('report')">📄 Export Report</button>
-            <button class="qa-btn" onclick="adminAction('promo')">🎁 Create Promo</button>
-            <button class="qa-btn danger" onclick="adminAction('maintenance')">🔧 Maintenance Mode</button>
-          </div>
-        </div>
+        <div class="admin-panel"><div class="ap-header"><span>📋 Live Bookings</span><span class="ap-badge">6 Active</span></div><div class="admin-table"><div class="at-row at-head"><span>ID</span><span>Service</span><span>User</span><span>Status</span><span>Amount</span></div><div class="at-row"><span>#2847</span><span>⚡ Electric</span><span>Rahul S.</span><span class="at-status live">On Way</span><span>₹399</span></div><div class="at-row"><span>#2846</span><span>🔧 Plumber</span><span>Priya M.</span><span class="at-status active">In Progress</span><span>₹249</span></div><div class="at-row"><span>#2845</span><span>🏠 Cleaning</span><span>Amit K.</span><span class="at-status done">Complete</span><span>₹599</span></div><div class="at-row"><span>#2844</span><span>🚗 Mechanic</span><span>Sonia T.</span><span class="at-status live">On Way</span><span>₹450</span></div><div class="at-row"><span>#2843</span><span>📺 Appliance</span><span>Vikram R.</span><span class="at-status pending">Pending</span><span>₹349</span></div></div></div>
+        <div class="admin-panel"><div class="ap-header"><span>👥 Recent Users</span><span class="ap-badge">1,842 Total</span></div><div class="admin-table"><div class="at-row at-head"><span>Name</span><span>Contact</span><span>Role</span><span>Bookings</span></div><div class="at-row"><span>Rahul S.</span><span>rahul@…</span><span class="role-pill user">User</span><span>4</span></div><div class="at-row"><span>Priya M.</span><span>+91 987…</span><span class="role-pill user">User</span><span>2</span></div><div class="at-row"><span>Admin A.</span><span>admin@…</span><span class="role-pill admin">Admin</span><span>—</span></div><div class="at-row"><span>Vikram R.</span><span>vikram@…</span><span class="role-pill user">User</span><span>7</span></div></div></div>
+        <div class="admin-panel"><div class="ap-header"><span>📊 Service Breakdown</span><span class="ap-badge">Today</span></div><div class="service-bars"><div class="sb-row"><span>⚡ Electrician</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:78%;background:var(--accent)"></div></div><span>78</span></div><div class="sb-row"><span>🔧 Plumber</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:62%;background:var(--blue)"></div></div><span>62</span></div><div class="sb-row"><span>🏠 Cleaning</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:54%;background:var(--green)"></div></div><span>54</span></div><div class="sb-row"><span>🚗 Mechanic</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:41%;background:var(--yellow)"></div></div><span>41</span></div><div class="sb-row"><span>📺 Appliance</span><div class="sb-bar-wrap"><div class="sb-bar" style="width:32%;background:#a855f7"></div></div><span>32</span></div></div></div>
+        <div class="admin-panel"><div class="ap-header"><span>⚡ Quick Actions</span></div><div class="quick-actions"><button class="qa-btn" onclick="adminAction('broadcast')">📢 Send Broadcast</button><button class="qa-btn" onclick="adminAction('technician')">➕ Add Technician</button><button class="qa-btn" onclick="adminAction('report')">📄 Export Report</button><button class="qa-btn" onclick="adminAction('promo')">🎁 Create Promo</button><button class="qa-btn danger" onclick="adminAction('maintenance')">🔧 Maintenance Mode</button></div></div>
       </div>
     </div>
   </div>
 
-  <!-- ===== CHATBOT ===== -->
-  <button class="chat-fab" onclick="toggleChat()" title="AI Assistant">🤖</button>
+  <!-- Chatbot -->
+  <button class="chat-fab" onclick="toggleChat()">🤖</button>
   <div class="chat-window hidden" id="chat-window">
-    <div class="chat-header">
-      <div class="chat-avatar">🤖</div>
-      <div><div class="chat-hname">FixBot AI</div><div class="chat-hsub">● Online · Instant Fix Assistant</div></div>
-      <button class="chat-close" onclick="toggleChat()">✕</button>
-    </div>
-    <div class="chat-msgs" id="chat-msgs">
-      <div class="msg bot">Hey! 👋 I'm FixBot, your AI assistant. How can I help you today?</div>
-      <div class="msg bot">I can help you book a service, track your technician, or answer any questions!</div>
-    </div>
-    <div class="chat-chips">
-      <button class="chat-chip" onclick="chatQuick('Book a service')">📋 Book</button>
-      <button class="chat-chip" onclick="chatQuick('Track my booking')">📍 Track</button>
-      <button class="chat-chip" onclick="chatQuick('What services do you offer?')">🔧 Services</button>
-      <button class="chat-chip" onclick="chatQuick('What are your prices?')">💰 Pricing</button>
-    </div>
-    <div class="chat-input-row">
-      <input class="chat-input" id="chat-input" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendChat()"/>
-      <button class="chat-send" onclick="sendChat()">➤</button>
-    </div>
+    <div class="chat-header"><div class="chat-avatar">🤖</div><div><div class="chat-hname">FixBot AI</div><div class="chat-hsub">● Online</div></div><button class="chat-close" onclick="toggleChat()">✕</button></div>
+    <div class="chat-msgs" id="chat-msgs"><div class="msg bot">Hey! 👋 I'm FixBot. How can I help you?</div></div>
+    <div class="chat-chips"><button class="chat-chip" onclick="chatQuick('Book a service')">📋 Book</button><button class="chat-chip" onclick="chatQuick('Track my booking')">📍 Track</button><button class="chat-chip" onclick="chatQuick('What services do you offer?')">🔧 Services</button><button class="chat-chip" onclick="chatQuick('Prices?')">💰 Pricing</button></div>
+    <div class="chat-input-row"><input class="chat-input" id="chat-input" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendChat()"/><button class="chat-send" onclick="sendChat()">➤</button></div>
   </div>
 
-</div><!-- end main-app -->
+</div><!-- end screen-app -->
 
-<script src="assets/js/app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
